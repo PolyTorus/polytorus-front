@@ -1,6 +1,6 @@
 import React from 'react'
 import { VStack, SimpleGrid, Box, Heading, Text, Icon as LucideIcon } from '@yamada-ui/react'
-import { Feature, Action } from '../types'
+import { Feature, Msg } from '../types'
 
 interface FeatureProps extends Feature {
     onClick: () => void
@@ -29,7 +29,7 @@ const FeatureComponent: React.FC<FeatureProps> = ({ title, description, onClick 
 
 interface FeaturesProps {
     features: Feature[]
-    dispatch: React.Dispatch<Action>
+    dispatch: React.Dispatch<Msg>
 }
 
 export const Features: React.FC<FeaturesProps> = ({ features, dispatch }) => (

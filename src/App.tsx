@@ -1,35 +1,32 @@
-import { useState } from "react";
-import viteLogo from "/vite.svg";
-import reactLogo from "./assets/react.svg";
-import "./App.css";
+import React, { Reducer, useReducer } from "react";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { appReducer } from "./updates/AppUpdate"
+import { initialState } from "./models/AppState";
+import { Model, Msg } from "./types";
+import { Home } from "./pages/Home";
+import { SideBar } from "./components/SideBar";
+import { Box, Flex } from "@yamada-ui/react";
 
 function App() {
-	const [count, setCount] = useState(0);
+	const [model, dispatch] = useReducer<Reducer<Model, Msg>, Model>(
+		(state, action) => appReducer(action, state),
+		initialState,
+		(initial) => initial
+	);
 
 	return (
-		<>
-			<div>
-				<a href="https://vitejs.dev" target="_blank" rel="noreferrer">
-					<img src={viteLogo} className="logo" alt="Vite logo" />
-				</a>
-				<a href="https://react.dev" target="_blank" rel="noreferrer">
-					<img src={reactLogo} className="logo react" alt="React logo" />
-				</a>
-			</div>
-			<h1>Vite + React</h1>
-			<div className="card">
-				<button type="button" onClick={() => setCount((count) => count + 1)}>
-					count is {count}
-				</button>
-				<p>
-					Edit <code>src/App.tsx</code> and save to test HMR
-				</p>
-			</div>
-			<p className="read-the-docs">
-				Click on the Vite and React logos to learn more
-			</p>
-		</>
-	);
+		<BrowserRouter>
+			<Flex height="100vh">
+				<SideBar model={model} />
+				<Box flex={1} overflowY="auto">
+					<Routes>
+						<Route path="/" element={<Home model={model} dispatch={dispatch}/>}/>
+						{/* Add other routes here */}
+					</Routes>
+				</Box>
+			</Flex>
+		</BrowserRouter>
+	)
 }
 
 export default App;

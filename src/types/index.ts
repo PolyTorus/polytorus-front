@@ -1,18 +1,33 @@
+export type Route = 
+					'/'
+					| '/about'
+					| '/features'
+					| '/team';
+
+export interface TeamMember {
+	name: string;
+	role: string;
+}
+
 export interface Feature {
 	icon: keyof typeof import("lucide-react");
 	title: string;
 	description: string;
 }
 
-export interface AppState {
+export interface Model {
 	title: string;
 	subtitle: string;
 	features: Feature[];
 	ctaText: string;
 	ctaButtonText: string;
+	teamMembers: TeamMember[]
 	copyright: string;
+	route: Route;
 }
 
-export type Action =
+export type Msg =
 	| { type: "CTA_CLICKED" }
-	| { type: "FEATURE_CLICKED"; payload: string };
+	| { type: "FEATURE_CLICKED"; payload: string }
+	| { type: "NAVIGATE_TO"; route: Route }
+	| { type: "LOAD_TEAM_MEMBERS" };

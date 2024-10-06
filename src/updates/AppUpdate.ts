@@ -1,12 +1,14 @@
-import type { Action, AppState } from "../types";
+import type { Model, Msg } from "../types";
 
-export const appReducer = (state: AppState, action: Action): AppState => {
-	switch (action.type) {
+export const appReducer = (msg: Msg, model: Model): Model => {
+	switch (msg.type) {
+		case "NAVIGATE_TO":
+			return {...model, route: msg.route};
 		case "CTA_CLICKED":
-			return state;
+			return model;
 		case "FEATURE_CLICKED":
-			return state;
+			return model;
 		default:
-			return state;
+			return model;
 	}
 };

@@ -1,14 +1,16 @@
 import { StrictMode } from "react";
 import { createRoot } from "react-dom/client";
 import App from "./App.tsx";
-import "./index.css";
+import { UIProvider } from "@yamada-ui/react";
 
 const rootElement = document.getElementById("root");
 
 if (rootElement) {
 	createRoot(rootElement).render(
 		<StrictMode>
-			<App />
+			<UIProvider>
+				<App />
+			</UIProvider>
 		</StrictMode>,
 	);
 } else {

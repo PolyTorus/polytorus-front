@@ -1,6 +1,6 @@
-import type { AppState } from "../types";
+import type { Model } from "../types";
 
-export const initialState: AppState = {
+export const initialState: Model = {
 	title: "polytorus",
 	subtitle: "post quantum layer 1 blockchain",
 	features: [
@@ -12,5 +12,7 @@ export const initialState: AppState = {
 	],
 	ctaText: "Welcome",
 	ctaButtonText: "show description",
+	teamMembers: [],
 	copyright: "© 2024",
+	route: "/"
 };
