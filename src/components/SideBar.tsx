@@ -1,7 +1,8 @@
 import React from "react";
 import { Box, Flex, Link, Text, VStack, Icon } from "@yamada-ui/react";
 import { NavLink, useLocation, Link as RouterLink } from "react-router-dom";
-import { Github, Linkedin, Twitter } from '@yamada-ui/lucide';
+import { FaGithub, FaTwitter, FaLinkedin, FaDiscord } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaCogs, FaUsers } from 'react-icons/fa';
 import { Model } from "../types";
 
 interface SideBarProps {
@@ -12,19 +13,21 @@ interface SideBarProps {
 interface NavItem {
   path: string;
   label: string;
+  icon: React.ElementType;
 }
 
 const navItems: NavItem[] = [
-  { path: "/", label: "Home" },
-  { path: "/about", label: "About" },
-  { path: "/features", label: "Features" },
-  { path: "/team", label: "Team" }
+  { path: "/", label: "Home", icon: FaHome },
+  { path: "/about", label: "About", icon: FaInfoCircle },
+  { path: "/features", label: "Features", icon: FaCogs },
+  { path: "/team", label: "Team", icon: FaUsers }
 ]
 
 const socialIcons = [
-  { icon: Github, href: "https://github.com" },
-  { icon: Twitter, href: "https://twitter.com" },
-  { icon: Linkedin, href: "https://linkedin.com" }
+  { icon: FaGithub, href: "https://github.com" },
+  { icon: FaTwitter, href: "https://twitter.com" },
+  { icon: FaLinkedin, href: "https://linkedin.com" },
+  { icon: FaDiscord, href: "https://discord.com" }
 ]
 
 export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
@@ -33,7 +36,7 @@ export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
   return (
     <Flex flexDirection="column" width="250px" bg="gray.800" color="white" height="100vh">
       <VStack align="stretch" p={4} flex={1}>
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+        <Text fontSize="2xl" fontWeight="bold" mb={6} textAlign={"center"}>
           {model.title}
         </Text>
         {navItems.map((item) => (
@@ -41,12 +44,23 @@ export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
             key={item.path}
             as={RouterLink}
             to={item.path}
+            py={2}
+            px={4}
+            borderRadius="md"
+            _hover={{
+              bg: "gray.700",
+              color: "yellow.400",
+              textDecoration: "none"
+            }}
+            bg={location.pathname === item.path ? "gray.700" : "transparent"}
             color={location.pathname === item.path ? "yellow.400" : "white"}
             fontWeight={location.pathname === item.path ? "bold" : "normal"}
-            _hover={{ textDecoration: "none", color: "yellow.200" }}
-            py={2}
+            transition="all 0.3s"
           >
-            {item.label}
+            <Flex align="center">
+              <Icon as={item.icon} boxSize={5} mr={3} />
+              <Text>{item.label}</Text>
+            </Flex>
           </Link>
         ))}
       </VStack>
