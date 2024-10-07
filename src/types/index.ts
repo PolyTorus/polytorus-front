@@ -2,7 +2,8 @@ export type Route =
 					'/'
 					| '/about'
 					| '/features'
-					| '/team';
+					| '/team'
+					| '/join';
 
 export interface TeamMember {
 	name: string;
@@ -30,4 +31,5 @@ export type Msg =
 	| { type: "CTA_CLICKED" }
 	| { type: "FEATURE_CLICKED"; payload: string }
 	| { type: "NAVIGATE_TO"; route: Route }
-	| { type: "LOAD_TEAM_MEMBERS" };
+	| { type: "LOAD_TEAM_MEMBERS" }
+	| { type: "TOGGLE_FEATURE", index: number };
