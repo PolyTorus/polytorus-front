@@ -6,7 +6,7 @@ import { Model, Msg } from "./types";
 import { Home } from "./pages/Home";
 import { SideBar } from "./components/SideBar";
 import { Box, Flex } from "@yamada-ui/react";
-import { Footer } from "./components/Footer";
+import { TeamPage } from "./pages/Team";
 
 function App() {
 	const [model, dispatch] = useReducer<Reducer<Model, Msg>, Model>(
@@ -24,6 +24,7 @@ function App() {
                         <Box flex={1}>
                             <Routes>
                                 <Route path="/" element={<Home model={model} dispatch={dispatch}/>}/>
+								<Route path="/team" element={<TeamPage/>}/>
                                 {/* Add other routes here */}
                             </Routes>
                         </Box>
