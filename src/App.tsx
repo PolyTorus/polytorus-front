@@ -6,6 +6,7 @@ import { Model, Msg } from "./types";
 import { Home } from "./pages/Home";
 import { SideBar } from "./components/SideBar";
 import { Box, Flex } from "@yamada-ui/react";
+import { Footer } from "./components/Footer";
 
 function App() {
 	const [model, dispatch] = useReducer<Reducer<Model, Msg>, Model>(
@@ -16,16 +17,20 @@ function App() {
 
 	return (
 		<BrowserRouter>
-			<Flex height="100vh">
-				<SideBar model={model} />
-				<Box flex={1} overflowY="auto">
-					<Routes>
-						<Route path="/" element={<Home model={model} dispatch={dispatch}/>}/>
-						{/* Add other routes here */}
-					</Routes>
-				</Box>
-			</Flex>
-		</BrowserRouter>
+            <Flex height="100vh" direction="column">
+                <Flex flex={1} overflow="hidden">
+                    <SideBar model={model} copyright={"PolyTorus"} />
+                    <Box flex={1} overflowY="auto" display="flex" flexDirection="column">
+                        <Box flex={1}>
+                            <Routes>
+                                <Route path="/" element={<Home model={model} dispatch={dispatch}/>}/>
+                                {/* Add other routes here */}
+                            </Routes>
+                        </Box>
+                    </Box>
+                </Flex>
+            </Flex>
+        </BrowserRouter>
 	)
 }
 

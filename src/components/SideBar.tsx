@@ -1,31 +1,42 @@
-import { Box, Heading, Link, Text, VStack } from "@yamada-ui/react";
-import type React from "react";
+import React from "react";
+import { Box, Flex, Link, Text, VStack, Icon } from "@yamada-ui/react";
+import { NavLink, useLocation, Link as RouterLink } from "react-router-dom";
+import { FaGithub, FaTwitter, FaLinkedin, FaDiscord } from 'react-icons/fa';
+import { FaHome, FaInfoCircle, FaCogs, FaUsers } from 'react-icons/fa';
 import { Model } from "../types";
-import { NavLink, useLocation, Link as RouterLink} from "react-router-dom";
 
 interface SideBarProps {
-	model: Model;
+  model: Model;
+  copyright: string;
 }
 
 interface NavItem {
-	path: string;
-	label: string;
+  path: string;
+  label: string;
+  icon: React.ElementType;
 }
 
 const navItems: NavItem[] = [
-	{ path: "/", label: "Home" },
-	{ path: "/about", label: "About this project" },
-	{ path: "/features", label: "Features" },
-	{ path: "/team", label: "Team" }
+  { path: "/", label: "Home", icon: FaHome },
+  { path: "/about", label: "About", icon: FaInfoCircle },
+  { path: "/features", label: "Features", icon: FaCogs },
+  { path: "/team", label: "Team", icon: FaUsers }
 ]
 
-export const SideBar: React.FC<SideBarProps> = ({ model }) => {
-	const location = useLocation();
+const socialIcons = [
+  { icon: FaGithub, href: "https://github.com" },
+  { icon: FaTwitter, href: "https://twitter.com" },
+  { icon: FaLinkedin, href: "https://linkedin.com" },
+  { icon: FaDiscord, href: "https://discord.com" }
+]
+
+export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
+  const location = useLocation();
 
   return (
-    <Box width="250px" bg="gray.800" color="white" p={4} height="100vh">
-      <VStack align="stretch" padding={4}>
-        <Text fontSize="2xl" fontWeight="bold" mb={4}>
+    <Flex flexDirection="column" width="250px" bg="gray.800" color="white" height="100vh">
+      <VStack align="stretch" p={4} flex={1}>
+        <Text fontSize="2xl" fontWeight="bold" mb={6} textAlign={"center"}>
           {model.title}
         </Text>
         {navItems.map((item) => (
@@ -33,14 +44,54 @@ export const SideBar: React.FC<SideBarProps> = ({ model }) => {
             key={item.path}
             as={RouterLink}
             to={item.path}
+            py={2}
+            px={4}
+            borderRadius="md"
+            _hover={{
+              bg: "gray.700",
+              color: "yellow.400",
+              textDecoration: "none"
+            }}
+            bg={location.pathname === item.path ? "gray.700" : "transparent"}
             color={location.pathname === item.path ? "yellow.400" : "white"}
             fontWeight={location.pathname === item.path ? "bold" : "normal"}
-            _hover={{ textDecoration: "none", color: "yellow.200" }}
+            transition="all 0.3s"
           >
-            {item.label}
+            <Flex align="center">
+              <Icon as={item.icon} boxSize={5} mr={3} />
+              <Text>{item.label}</Text>
+            </Flex>
           </Link>
         ))}
       </VStack>
-    </Box>
+      <Box p={4} borderTop="1px solid" borderTopColor="gray.700">
+        <Flex justify="center" mb={2}>
+          {socialIcons.map((item, index) => (
+            <Link 
+              key={index}
+              href={item.href} 
+              isExternal 
+              mx={2} 
+              _hover={{ color: "yellow.400" }}
+              transition="all 0.2s ease"
+            >
+              <Icon 
+                as={item.icon} 
+                boxSize={5} 
+                color="gray.400"
+                _hover={{ 
+                  color: "yellow.400",
+                  transform: "scale(1.2)"
+                }}
+                transition="all 0.2s ease"
+              />
+            </Link>
+          ))}
+        </Flex>
+        <Text fontSize="xs" textAlign="center" color="gray.500">
+          {copyright}
+        </Text>
+      </Box>
+    </Flex>
   );
 };
