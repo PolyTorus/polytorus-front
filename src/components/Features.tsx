@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import {
 	VStack,
 	SimpleGrid,
@@ -7,7 +7,7 @@ import {
 	Text,
 	Icon as LucideIcon,
 } from "@yamada-ui/react";
-import { Feature, Msg } from "../types";
+import type { Feature, Msg } from "../types";
 
 interface FeatureProps extends Feature {
 	onClick: () => void;

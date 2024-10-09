@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import { VStack, Heading, Text, Button } from "@yamada-ui/react";
 
 interface CallToActionProps {

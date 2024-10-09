@@ -1,4 +1,4 @@
-import React from "react";
+import type React from "react";
 import {
 	Box,
 	Container,
@@ -15,15 +15,7 @@ import {
 	Wrap,
 } from "@yamada-ui/react";
 import { Motion } from "@yamada-ui/motion";
-import {
-	Code,
-	Server,
-	Layout,
-	User,
-	Github,
-	Linkedin,
-	XIcon,
-} from "lucide-react";
+import { Code, User, Github, Linkedin, XIcon } from "lucide-react";
 
 interface TeamMember {
 	name: string;
@@ -37,7 +29,7 @@ interface TeamMember {
 
 interface TeamData {
 	name: string;
-	icon: React.ElementType;
+	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 	description: string;
 	members: TeamMember[];
 }
@@ -56,45 +48,12 @@ const teamData: TeamData[] = [
 				githubUsername: "quantumshiro",
 				linkedinUrl: "",
 				XUrl: "https://x.com/Curiosi46542428",
-				skills: ["暗号理論", "", "Rust"],
+				skills: ["暗号理論", "Rust"],
 			},
 			// 他のメンバーも同様に追加
 		],
 	},
-	{
-		name: "バックエンド",
-		icon: Server,
-		description:
-			"高性能で安全なバックエンドシステムの設計と実装を担当するチームです。",
-		members: [
-			{
-				name: "Bob Johnson",
-				role: "シニアバックエンドエンジニア",
-				bio: "分散システムの専門家。10年以上のバックエンド開発経験を持つ。",
-				githubUsername: "bob-backend",
-				linkedinUrl: "https://linkedin.com/in/bob-johnson",
-				skills: ["Go", "Rust", "分散システム", "データベース設計"],
-			},
-			// 他のメンバーも同様に追加
-		],
-	},
-	{
-		name: "フロントエンド",
-		icon: Layout,
-		description:
-			"ユーザーフレンドリーで直感的なインターフェースの開発を行うチームです。",
-		members: [
-			{
-				name: "Charlie Brown",
-				role: "リードフロントエンドデベロッパー",
-				bio: "ユーザー体験とアクセシビリティに焦点を当てたUI/UX設計のスペシャリスト。",
-				githubUsername: "charlie-frontend",
-				linkedinUrl: "https://linkedin.com/in/charlie-brown",
-				skills: ["React", "TypeScript", "UI/UX設計", "アクセシビリティ"],
-			},
-			// 他のメンバーも同様に追加
-		],
-	},
+	// 他のチームデータも同様に追加
 ];
 
 const MemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
@@ -131,7 +90,13 @@ const MemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
 						</VStack>
 					</HStack>
 					<Text fontSize="sm">{member.bio}</Text>
-					<Wrap></Wrap>
+					<Wrap>
+						{member.skills.map((skill, index) => (
+							<Tag key={index} size="sm" colorScheme="blue">
+								{skill}
+							</Tag>
+						))}
+					</Wrap>
 					<HStack>
 						<Link
 							href={`https://github.com/${member.githubUsername}`}
@@ -142,6 +107,11 @@ const MemberCard: React.FC<{ member: TeamMember }> = ({ member }) => {
 						{member.linkedinUrl && (
 							<Link href={member.linkedinUrl} isExternal>
 								<Icon as={Linkedin} />
+							</Link>
+						)}
+						{member.XUrl && (
+							<Link href={member.XUrl} isExternal>
+								<Icon as={XIcon} />
 							</Link>
 						)}
 					</HStack>

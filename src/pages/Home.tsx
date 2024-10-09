@@ -1,4 +1,5 @@
-import React, { useState } from "react";
+import type React from "react";
+import { useState } from "react";
 import {
 	VStack,
 	Heading,
@@ -11,7 +12,7 @@ import {
 	Fade,
 	Motion,
 } from "@yamada-ui/react";
-import { Model, Msg } from "../types";
+import type { Model, Msg } from "../types";
 import * as LucideIcons from "lucide-react";
 
 type IconName = keyof typeof LucideIcons;

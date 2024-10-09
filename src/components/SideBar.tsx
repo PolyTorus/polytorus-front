@@ -1,6 +1,6 @@
-import React from "react";
+import type React from "react";
 import { Box, Flex, Link, Text, VStack, Icon } from "@yamada-ui/react";
-import { NavLink, useLocation, Link as RouterLink } from "react-router-dom";
+import { useLocation, Link as RouterLink } from "react-router-dom";
 import {
 	FaGithub,
 	FaTwitter,
@@ -9,7 +9,7 @@ import {
 	FaNeos,
 } from "react-icons/fa";
 import { FaHome, FaInfoCircle, FaCogs, FaUsers } from "react-icons/fa";
-import { Model } from "../types";
+import type { Model } from "../types";
 
 interface SideBarProps {
 	model: Model;
@@ -19,7 +19,7 @@ interface SideBarProps {
 interface NavItem {
 	path: string;
 	label: string;
-	icon: React.ElementType;
+	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
 }
 
 const navItems: NavItem[] = [
@@ -30,7 +30,12 @@ const navItems: NavItem[] = [
 	{ path: "/nodes", label: "Nodes", icon: FaNeos },
 ];
 
-const socialIcons = [
+interface SocialIcon {
+	icon: React.ComponentType<React.SVGProps<SVGSVGElement>>;
+	href: string;
+}
+
+const socialIcons: SocialIcon[] = [
 	{ icon: FaGithub, href: "https://github.com" },
 	{ icon: FaTwitter, href: "https://twitter.com" },
 	{ icon: FaLinkedin, href: "https://linkedin.com" },
@@ -49,7 +54,7 @@ export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
 			height="100vh"
 		>
 			<VStack align="stretch" p={4} flex={1}>
-				<Text fontSize="2xl" fontWeight="bold" mb={6} textAlign={"center"}>
+				<Text fontSize="2xl" fontWeight="bold" mb={6} textAlign="center">
 					{model.title}
 				</Text>
 				{navItems.map((item) => (
@@ -81,7 +86,7 @@ export const SideBar: React.FC<SideBarProps> = ({ model, copyright }) => {
 				<Flex justify="center" mb={2}>
 					{socialIcons.map((item, index) => (
 						<Link
-							key={index}
+							key={`${item.href}-${index}`}
 							href={item.href}
 							isExternal
 							mx={2}

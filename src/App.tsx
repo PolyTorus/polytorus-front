@@ -1,8 +1,8 @@
-import React, { Reducer, useReducer } from "react";
+import { type Reducer, useReducer } from "react";
 import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { appReducer } from "./updates/AppUpdate";
 import { initialState } from "./models/AppState";
-import { Model, Msg } from "./types";
+import type { Model, Msg } from "./types";
 import { Home } from "./pages/Home";
 import { SideBar } from "./components/SideBar";
 import { Box, Flex } from "@yamada-ui/react";
