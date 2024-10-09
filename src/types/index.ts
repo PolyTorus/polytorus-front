@@ -1,9 +1,4 @@
-export type Route = 
-					'/'
-					| '/about'
-					| '/features'
-					| '/team'
-					| '/join';
+export type Route = "/" | "/about" | "/features" | "/team" | "/join" | "/nodes";
 
 export interface TeamMember {
 	name: string;
@@ -22,7 +17,7 @@ export interface Model {
 	features: Feature[];
 	ctaText: string;
 	ctaButtonText: string;
-	teamMembers: TeamMember[]
+	teamMembers: TeamMember[];
 	copyright: string;
 	route: Route;
 }
@@ -32,4 +27,4 @@ export type Msg =
 	| { type: "FEATURE_CLICKED"; payload: string }
 	| { type: "NAVIGATE_TO"; route: Route }
 	| { type: "LOAD_TEAM_MEMBERS" }
-	| { type: "TOGGLE_FEATURE", index: number };
+	| { type: "TOGGLE_FEATURE"; index: number };

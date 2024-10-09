@@ -14,5 +14,5 @@ export const initialState: Model = {
 	ctaButtonText: "show description",
 	teamMembers: [],
 	copyright: "© 2024",
-	route: "/"
+	route: "/",
 };
