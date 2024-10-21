@@ -7,7 +7,7 @@ import { Home } from "./pages/Home";
 import { SideBar } from "./components/SideBar";
 import { Box, Flex } from "@yamada-ui/react";
 import { TeamPage } from "./pages/Team";
-import { Nodes } from "./pages/Nodes";
+import TransactionNetwork from "./pages/Nodes";
 
 function App() {
 	const [model, dispatch] = useReducer<Reducer<Model, Msg>, Model>(
@@ -15,6 +15,17 @@ function App() {
 		initialState,
 		(initial) => initial,
 	);
+
+	// Dummy data for testing
+	const dummyNodes = Array.from({ length: 30 }, (_, i) => ({
+		id: `${i + 1}`,
+		name: `Node ${i + 1}`,
+		// Remove the position here; it will be calculated in TransactionNetwork
+	  }));
+	
+	  const dummyTransactions = [
+		{ from: '1', to: '2', amount: 100 },
+	  ];
 
 	return (
 		<BrowserRouter>
@@ -28,8 +39,9 @@ function App() {
 									path="/"
 									element={<Home model={model} dispatch={dispatch} />}
 								/>
+								<Route path="/about" element={<div>About</div>} />
 								<Route path="/team" element={<TeamPage />} />
-								<Route path="/nodes" element={<Nodes />} />
+								<Route path="/nodes" element={<TransactionNetwork nodes={dummyNodes} transactions={dummyTransactions} />} />
 							</Routes>
 						</Box>
 					</Box>
