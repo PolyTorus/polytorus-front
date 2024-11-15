@@ -7,16 +7,11 @@ import {
 	Button,
 	useColorModeValue,
 	Box,
-	SimpleGrid,
 	Flex,
-	Container,
-	Grid,
-	GridItem,
 	Motion,
 	Fade,
 } from "@yamada-ui/react";
-import { motion } from "framer-motion";
-import type { Model, Msg, Feature, IconName } from "../types";
+import type { IconName } from "../types";
 import * as LucideIcons from "lucide-react";
 
 const DynamicIcon: React.FC<{
