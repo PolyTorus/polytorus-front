@@ -21,11 +21,9 @@ function App() {
 		id: `${i + 1}`,
 		name: `Node ${i + 1}`,
 		// Remove the position here; it will be calculated in TransactionNetwork
-	  }));
-	
-	  const dummyTransactions = [
-		{ from: '1', to: '2', amount: 100 },
-	  ];
+	}));
+
+	const dummyTransactions = [{ from: "1", to: "2", amount: 100 }];
 
 	return (
 		<BrowserRouter>
@@ -41,7 +39,15 @@ function App() {
 								/>
 								<Route path="/about" element={<div>About</div>} />
 								<Route path="/team" element={<TeamPage />} />
-								<Route path="/nodes" element={<TransactionNetwork nodes={dummyNodes} transactions={dummyTransactions} />} />
+								<Route
+									path="/nodes"
+									element={
+										<TransactionNetwork
+											nodes={dummyNodes}
+											transactions={dummyTransactions}
+										/>
+									}
+								/>
 							</Routes>
 						</Box>
 					</Box>
